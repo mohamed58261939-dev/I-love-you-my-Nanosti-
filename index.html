@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nanousti 💕</title>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
 <style>
 body { margin: 0; background: #6b1f3a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; overflow-x: hidden; }
 .bow { position: fixed; top: -20px; font-size: 24px; animation: fall linear infinite; z-index: 1000; pointer-events: none; }
@@ -13,139 +12,89 @@ body { margin: 0; background: #6b1f3a; font-family: 'Segoe UI', Tahoma, Geneva, 
 #musicBtn { position: fixed; top: 15px; left: 15px; background: #ff9dbb; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 22px; z-index: 2000; cursor: pointer; display: none; }
 .card { background: #7a2a46; margin: 15px; padding: 25px; border-radius: 25px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid #ff9dbb; position: relative; z-index: 10; }
 .gallery { display: flex; flex-direction: column; gap: 20px; padding: 10px; }
-.gallery img { width: 100%; height: auto; border-radius: 20px; object-fit: contain; border: 3px solid #ff9dbb; background: #4a1428; }
+.gallery img { width: 100%; height: auto; border-radius: 20px; border: 3px solid #ff9dbb; background: #4a1428; }
 #main, #quiz-section { display: none !important; }
 #surprise-content { display: none; opacity: 0; transition: opacity 2s; }
-input { padding: 12px; border-radius: 12px; border: 2px solid #ff9dbb; text-align: center; font-size: 16px; width: 85%; margin-top: 10px; outline: none; background: #5a1a30; color: white; }
-button { padding: 12px 35px; border: none; border-radius: 15px; margin-top: 15px; background: #ff9dbb; color: #6b1f3a; font-weight: bold; cursor: pointer; font-size: 16px; }
+input { padding: 12px; border-radius: 12px; border: 2px solid #ff9dbb; text-align: center; width: 85%; margin-top: 10px; background: #5a1a30; color: white; }
+button { padding: 12px 35px; border: none; border-radius: 15px; margin-top: 15px; background: #ff9dbb; color: #6b1f3a; font-weight: bold; cursor: pointer; }
 </style>
 </head>
 <body>
-
-<audio id="song" loop preload="auto"><source src="music/song.mp3" type="audio/mpeg"></audio>
+<audio id="song" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
 <button id="musicBtn" onclick="toggleMusic()">🔊</button>
-
 <div class="card" id="login" style="margin-top: 50px;">
   <h2 style="color: #ff9dbb;">أهلاً يا ست البنات 🎀</h2>
-  <p>بتحبيني؟</p>
-  <input type="text" id="love-check" placeholder="بموت فيك">
-  <br>
-  <p>تاريخ ميلادك يعيوني؟</p>
-  <input type="text" id="pass" placeholder="10/5/2010">
-  <br>
+  <p>بتحبيني؟</p><input type="text" id="love-check" placeholder="بموت فيك"><br>
+  <p>تاريخ ميلادك يعيوني؟</p><input type="text" id="pass" placeholder="10/5/2010"><br>
   <button onclick="checkLogin()">دخول للقلب</button>
 </div>
-
-<div id="quiz-section">
-  <div class="card">
-    <h3 style="color: #ff9dbb;">🧩 اختبار الذكريات</h3>
+<div id="quiz-section"><div class="card">
     <p id="question-text" style="font-size: 1.2rem;"></p>
-    <input type="text" id="quiz-answer" placeholder="الإجابة هنا..">
-    <br>
+    <input type="text" id="quiz-answer" placeholder="الإجابة هنا.."><br>
     <button onclick="checkQuizAnswer()">تأكيد</button>
-    <p id="quiz-feedback" style="margin-top:15px; font-weight:bold;"></p>
-  </div>
-</div>
-
+</div></div>
 <div id="main">
-  <h1 style="text-align:center; padding-top: 20px; color: #ff9dbb;">𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒕𝒐 𝒐𝒖𝒓 𝒉𝒐𝒎𝒆 🏡</h1>
-  <div class="card"><h3>⏳ عداد حبنا</h3><p id="counter" style="font-size: 1.1rem; font-weight: bold; color: #ff9dbb;"></p></div>
-  <div class="card"><h3>💌 My Message</h3><p style="line-height: 1.8;">أناني فيكِ لدرجة لو إتحطيتي قُصاد الدُنيا كُلها مش هتردد لحظة في أختيارك..! <br><br> سـتبقين في عيوني طفلتي وحبيبتي وسأبق اغار عليكِ بقلب لا يعشق غيرك ❤️‍🩹..'</p></div>
-  
+  <div class="card"><h3>⏳ عداد حبنا</h3><p id="counter" style="font-size: 1.1rem; color: #ff9dbb;"></p></div>
   <div class="card"><h3>📸 ذكرياتنا</h3><div class="gallery">
-    <img src="images/img1.jpg"> <img src="images/img2.jpg"> <img src="images/img3.jpg"> <img src="images/img4.jpg"> <img src="images/img5.jpg">
-    <img src="images/img6.jpg"> <img src="images/img7.jpg"> <img src="images/img8.jpg"> <img src="images/img9.jpg"> <img src="images/img10.jpg">
-    <img src="images/img11.jpg"> <img src="images/img12.jpg"> <img src="images/img13.jpg"> <img src="images/img14.jpg"> <img src="images/img15.jpg">
-    <img src="images/img16.jpg"> <img src="images/img17.jpg"> <img src="images/img18.jpg"> <img src="images/img19.jpg"> <img src="images/img20.jpg">
+    <img src="img1.jpg"> <img src="food1.jpg"> <img src="drink1.jpg"> <img src="food2.jpg"> <img src="drink2.jpg">
   </div></div>
-
-  <div class="card"><h3>🎵 أغانينا</h3><div class="gallery"><img src="images/song1.jpg"><img src="images/song2.jpg"></div></div>
-  <div class="card"><h3>☕ مشروبنا</h3><div class="gallery"><img src="images/drink1.jpg"><img src="images/drink2.jpg"></div></div>
-  <div class="card"><h3>🍕 أكلنا المفضل</h3><div class="gallery"><img src="images/food1.jpg"><img src="images/food2.jpg"></div></div>
-
   <div class="card">
     <button id="surpriseBtn" onclick="triggerSurprise()">دوس هنا محضرلك مفاجأة 🎁</button>
     <div id="surprise-content">
-      <h3 style="color: #ff9dbb;">🤍 My Promise To You</h3>
-      <p style="line-height: 1.8; font-size: 1.1rem;">المشوار لسه طويل وعاوز أقولك عمري ماهتخلى عنك وطول مااحنا مع بعض هنعدي كل حاجه مع بعض والدنيا كلها تهون عشانك ووعد قصاد ربنا محدش هياخدك مني وانا ليكي وانتي ليا يديمك ليا يبطتي وميحرمنيش منك ولا من إبننا شلهوووووب ابدا🏡❤</p>
+      <p>المشوار لسه طويل وعاوز أقولك عمري ماهتخلى عنك.. وعد قصاد ربنا محدش هياخدك مني يديمك ليا يبطتي🏡❤</p>
     </div>
   </div>
 </div>
-
 <script>
-for(let i=0; i<30; i++){
+for(let i=0; i<25; i++){
   let b=document.createElement("div"); b.className="bow"; b.innerText="🎀";
   b.style.left=Math.random()*100+"vw"; b.style.animationDuration=(4+Math.random()*4)+"s";
   document.body.appendChild(b);
 }
-
 const quizData = [
   { q: "انا الحب والموب والاية؟", a: "الاسد والدب" },
-  { q: "تاريخ اول مقابلة مابينا؟", a: "12/12/2025" },
-  { q: "تاريخ تاني مقابلة؟", a: "19/12/2025" },
-  { q: "تاريخ ميلادي؟", a: "24/9/2008" },
   { q: "لازم نستغل الأوضاع يعمري هاتي بوسة😌🫦!", a: "💋" }
 ];
 let currentQuestion = 0;
-
 function checkLogin() {
-  let love = document.getElementById("love-check").value.trim();
-  let pass = document.getElementById("pass").value.trim();
-  if(love === "بموت فيك" && pass === "10/5/2010"){
+  if(document.getElementById("love-check").value.trim()==="بموت فيك" && document.getElementById("pass").value.trim()==="10/5/2010"){
     document.getElementById("login").style.display="none";
     document.getElementById("quiz-section").setAttribute("style", "display:block !important");
-    showQuestion();
-    document.getElementById("song").play();
-    document.getElementById("musicBtn").style.display="block";
+    showQuestion(); document.getElementById("song").play(); document.getElementById("musicBtn").style.display="block";
   } else { alert("والله ماهتخشي يلا😒"); }
 }
-
 function showQuestion() {
   document.getElementById("question-text").innerText = quizData[currentQuestion].q;
-  document.getElementById("quiz-answer").value = "";
-  if(currentQuestion === 4) document.querySelector("#quiz-section button").innerText = "دوسي هنا وخشي برجلك اليمين يعمري";
 }
-
 function checkQuizAnswer() {
-  let ans = document.getElementById("quiz-answer").value.trim();
-  if(ans === quizData[currentQuestion].a){
+  if(document.getElementById("quiz-answer").value.trim() === quizData[currentQuestion].a){
     currentQuestion++;
     if(currentQuestion < quizData.length) showQuestion();
     else {
-      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+      confetti({ particleCount: 200, spread: 100 });
       document.getElementById("quiz-section").setAttribute("style", "display:none !important");
       document.getElementById("main").setAttribute("style", "display:block !important");
     }
   } else { alert("والله ماهتخشي يلا😒"); }
 }
-
 function triggerSurprise() {
-  confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+  confetti({ particleCount: 150 });
   document.getElementById("surpriseBtn").style.display = "none";
-  let content = document.getElementById("surprise-content");
-  content.style.display = "block";
-  setTimeout(() => { content.style.opacity = "1"; }, 100);
+  document.getElementById("surprise-content").style.display = "block";
+  setTimeout(() => { document.getElementById("surprise-content").style.opacity = "1"; }, 100);
 }
-
 let start = new Date("2025-09-09T00:00:00");
 setInterval(() => {
-  let now = new Date(); let diff = now - start;
+  let diff = new Date() - start;
   let d = Math.floor(diff / 86400000);
   let h = Math.floor((diff % 86400000) / 3600000);
   let m = Math.floor((diff % 3600000) / 60000);
   let s = Math.floor((diff % 60000) / 1000);
   document.getElementById("counter").innerText = d + " يوم • " + h + " ساعة • " + m + " دقيقة • " + s + " ثانية";
 }, 1000);
-
 function toggleMusic(){
-  let s = document.getElementById("song"); let btn = document.getElementById("musicBtn");
-  s.paused ? (s.play(), btn.innerText="🔊") : (s.pause(), btn.innerText="🔇");
+  let s = document.getElementById("song"); s.paused ? s.play() : s.pause();
 }
 </script>
 </body>
 </html>
-
-
-
-
-
